@@ -30,24 +30,25 @@ document.addEventListener('DOMContentLoaded', function () {
   const header = document.querySelector('.site-header');
   let lastScrollY = window.scrollY;
   
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-      header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-      header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-      header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-      header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    }
-    
-    // Hide/show header on scroll
-    if (window.scrollY > lastScrollY && window.scrollY > 200) {
-      header.style.transform = 'translateY(-100%)';
-    } else {
-      header.style.transform = 'translateY(0)';
-    }
-    
-    lastScrollY = window.scrollY;
-  });
+  // Header scroll effect - CORRIGIDO PARA MANTER O AMARELO
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 100) {
+    header.style.backgroundColor = 'rgba(252, 255, 89, 0.98)'; // ← AMARELO COM TRANSPARÊNCIA
+    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+  } else {
+    header.style.backgroundColor = 'rgba(252, 255, 89, 0.95)'; // ← AMARELO COM TRANSPARÊNCIA
+    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+  }
+  
+  // Hide/show header on scroll
+  if (window.scrollY > lastScrollY && window.scrollY > 200) {
+    header.style.transform = 'translateY(-100%)';
+  } else {
+    header.style.transform = 'translateY(0)';
+  }
+  
+  lastScrollY = window.scrollY;
+});
   
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
