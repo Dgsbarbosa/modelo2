@@ -410,9 +410,13 @@ a:hover {
 .hero {
   position: relative;
   padding: 150px 0 100px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
   color: white;
   overflow: hidden;
+}
+
+.hero-heigth{
+  height: min-content;
 }
 
 .hero-content {
@@ -725,7 +729,7 @@ input:focus, textarea:focus, select:focus {
 
 /* Footer */
 .site-footer {
-  background-color: var(--dark);
+  background-color: var(--primary-dark);
   color: white;
   padding: 60px 0 20px;
 }
