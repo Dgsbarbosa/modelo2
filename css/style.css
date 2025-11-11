@@ -225,6 +225,11 @@ a:hover {
 .hamburger:after {
   top: 8px;
 }
+
+.title{
+  color: var(--secondary);
+  text-align: center;
+}
 /* Hero Section with Slideshow */
 .hero {
   position: relative;
@@ -275,7 +280,7 @@ a:hover {
 }
 
 .slide-title {
-  font-size: 3.5rem;
+  font-size: 3rem;
   color: #FCFF59;
   font-weight: 800;
   margin-bottom: 1rem;
@@ -355,6 +360,28 @@ a:hover {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+   .nav {
+    justify-content: center;
+    position: relative;
+    height: 50px;
+  }
+
+  .brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-toggle {
+    position: absolute;
+    right: 20px;
+  }
+
+  .nav-links {
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
   .slide-content {
     padding: 0 5%;
     align-items: center;
@@ -406,10 +433,15 @@ a:hover {
   }
 }
 
+.title{
+  text-align: center;
+  color: var(--secondary);
+}
+
 /* Hero Section */
 .hero {
   position: relative;
-  padding: 150px 0 100px;
+  padding: 100px 0 100px;
   background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
   color: white;
   overflow: hidden;
@@ -455,6 +487,17 @@ a:hover {
   align-items: center;
   gap: 10px;
   font-weight: 500;
+}
+.slides img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+.slides img.active {
+  opacity: 1;
 }
 
 .hero-visual {
@@ -612,6 +655,66 @@ a:hover {
 .feature-card p {
   color: rgba(255, 255, 255, 0.8);
 }
+
+/* Serviços */
+/* Galeria */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  align-items: center;
+}
+.gallery-grid img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.gallery-grid img:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Reviews */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 10px;
+}
+.review-card {
+  background: white;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+.review-card p {
+  font-style: italic;
+  margin-bottom: 12px;
+}
+.review-card .meta {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.review-avatar {
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#eee;
+  display:inline-block;
+  overflow:hidden;
+}
+.review-avatar img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.review-name { font-weight:700; color:var(--primary); }
+.review-date { font-size:0.85rem; color:var(--gray); margin-left:6px;}
 
 /* Contact Section */
 .contact-section {

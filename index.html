@@ -52,64 +52,35 @@
   <main>
     <!-- HERO SECTION COM SLIDESHOW -->
 
+
 <section class="hero" id="inicio">
+    <h1 class="title">JNL Segurança & Tecnologia </h1>
+
   <div class="slideshow">
-    <div class="slide active">
-      <img src="assets/slide1.jpeg" alt="Segurança e Tecnologia">
-      <div class="slide-content">
-        <h1 class="slide-title">JNL Segurança & Tecnologia</h1>
-        <p class="slide-subtitle">Soluções completas em segurança eletrônica e serviços elétricos</p>
-        <div class="hero-ctas">
-          <a href="#contato" class="btn-primary">Solicitar Orçamento</a>
-          <a href="https://wa.me/5514996481709" class="btn-secondary" target="_blank" rel="noopener">Falar no WhatsApp</a>
-        </div>
+    <div class="slides">
+      <img src="assets/slide1.jpeg" class="slide active" alt="">
+      <img src="assets/slide2.jpeg" class="slide" alt="">
+      <img src="assets/slide3.jpg" class="slide" alt="">
+      <img src="assets/slide4.jpeg" class="slide" alt="">
+    </div>
+
+    <div class="slide-content">
+      <h1 class="slide-title" id="slideText">Segurança e energia com excelência</h1>
+      <p class="slide-subtitle" id="slideSubtext">Soluções completas em segurança eletrônica e serviços elétricos</p>
+      <div class="hero-ctas">
+        <a href="#contato" class="btn-primary">Solicitar Orçamento</a>
+        <a href="https://wa.me/5514996481709" class="btn-secondary">Falar no WhatsApp</a>
       </div>
     </div>
-    <div class="slide">
-      <img src="assets/slide2.jpeg" alt="Segurança Eletrônica">
-      <div class="slide-content">
-        <h1 class="slide-title">Protegendo o que realmente importa</h1>
-        <p class="slide-subtitle">Segurança Eletrônica de última geração</p>
-        <div class="hero-ctas">
-          <a href="#seguranca" class="btn-primary">Ver Serviços</a>
-          <a href="#contato" class="btn-secondary">Solicitar Orçamento</a>
-        </div>
-      </div>
-    </div>
-    <div class="slide">
-      <img src="assets/slide3.jpg" alt="Serviços Elétricos">
-      <div class="slide-content">
-        <h1 class="slide-title">Serviços Elétricos com qualidade e confiança</h1>
-        <p class="slide-subtitle">Profissionais certificados e experientes</p>
-        <div class="hero-ctas">
-          <a href="#eletrico" class="btn-primary">Conhecer Serviços</a>
-          <a href="#contato" class="btn-secondary">Fazer Orçamento</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <button class="slide-arrow slide-arrow-prev" aria-label="Anterior">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M15 18l-6-6 6-6"/>
-    </svg>
-  </button>
-  <button class="slide-arrow slide-arrow-next" aria-label="Próximo">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M9 18l6-6-6-6"/>
-    </svg>
-  </button>
-  <div class="slide-indicators">
-    <button class="indicator active" data-slide="0"></button>
-    <button class="indicator" data-slide="1"></button>
-    <button class="indicator" data-slide="2"></button>
   </div>
 </section>
+
 
     <!-- HERO -->
     <section id="home" class="hero hero-heigth">
       <div class="hero-content container">
         <div class="hero-text">
-          <h1 class="hero-title">JNL Segurança &amp; Tecnologia</h1>
+          
           <p class="hero-subtitle">Soluções completas em segurança eletrônica e serviços elétricos para sua residência ou empresa.</p>
           <div class="hero-ctas">
             <a href="#contato" class="btn-primary">Solicitar Orçamento</a>
@@ -286,6 +257,34 @@
         </div>
       </div>
     </section>
+
+    <!-- Serviços -->
+
+<section id="galeria" class="section gallery-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Trabalhos Realizados</h2>
+      <p class="section-subtitle">Confira alguns dos nossos projetos mais recentes</p>
+    </div>
+    <div id="galleryGrid" class="gallery-grid">
+      <p>Carregando fotos...</p>
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES (fake) -->
+<section id="avaliacoes" class="section reviews-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>O que nossos clientes dizem</h2>
+      <p class="section-subtitle">Avaliações reais em breve — por enquanto, amostras.</p>
+    </div>
+    <div id="reviews" class="reviews-grid">
+      <!-- reviews serão injetadas via JS -->
+    </div>
+  </div>
+</section>
+
 
     <!-- Contato -->
     <section id="contato" class="section contact-section">

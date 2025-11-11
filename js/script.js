@@ -73,125 +73,39 @@ window.addEventListener('scroll', () => {
   });
   
   // Slideshow functionality
-  function initSlideshow() {
-    const slides = document.querySelectorAll('.slide');
-    const indicators = document.querySelectorAll('.indicator');
-    const prevBtn = document.querySelector('.slide-arrow-prev');
-    const nextBtn = document.querySelector('.slide-arrow-next');
-    let currentSlide = 0;
-    let slideInterval;
+function initSlideshow() {
+  const slides = document.querySelectorAll('.slide');
+  const slideText = document.getElementById('slideText');
+  const slideSubtext = document.getElementById('slideSubtext');
 
-    function showSlide(index) {
-      // Remove active class from all slides and indicators
-      slides.forEach(slide => slide.classList.remove('active'));
-      indicators.forEach(indicator => indicator.classList.remove('active'));
-      
-      // Add active class to current slide and indicator
-      slides[index].classList.add('active');
-      indicators[index].classList.add('active');
-      
-      currentSlide = index;
+  const texts = [
+    {
+      title: 'Segurança e energia com excelência',
+      subtitle: 'Soluções completas em segurança eletrônica e serviços elétricos'
+    },
+    {
+      title: 'Protegendo o que realmente importa',
+      subtitle: 'Segurança Eletrônica de última geração'
+    },
+    {
+      title: 'Serviços Elétricos com qualidade e confiança',
+      subtitle: 'Profissionais certificados e experientes'
     }
+  ];
 
-    function nextSlide() {
-      let nextIndex = (currentSlide + 1) % slides.length;
-      showSlide(nextIndex);
-    }
+  let current = 0;
+  function nextSlide() {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
 
-    function prevSlide() {
-      let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-      showSlide(prevIndex);
-    }
-
-    function startSlideshow() {
-      slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-    }
-
-    function stopSlideshow() {
-      clearInterval(slideInterval);
-    }
-
-    // Event listeners
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        nextSlide();
-        stopSlideshow();
-        startSlideshow();
-      });
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        prevSlide();
-        stopSlideshow();
-        startSlideshow();
-      });
-    }
-
-    // Indicator clicks
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        showSlide(index);
-        stopSlideshow();
-        startSlideshow();
-      });
-    });
-
-    // Pause on hover
-    const slideshow = document.querySelector('.slideshow');
-    if (slideshow) {
-      slideshow.addEventListener('mouseenter', stopSlideshow);
-      slideshow.addEventListener('mouseleave', startSlideshow);
-    }
-
-    // Touch events for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    if (slideshow) {
-      slideshow.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-      });
-      
-      slideshow.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      });
-    }
-    
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = touchStartX - touchEndX;
-      
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          // Swipe left - next slide
-          nextSlide();
-        } else {
-          // Swipe right - previous slide
-          prevSlide();
-        }
-        stopSlideshow();
-        startSlideshow();
-      }
-    }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') {
-        nextSlide();
-        stopSlideshow();
-        startSlideshow();
-      } else if (e.key === 'ArrowLeft') {
-        prevSlide();
-        stopSlideshow();
-        startSlideshow();
-      }
-    });
-
-    // Start the slideshow
-    startSlideshow();
+    slideText.textContent = texts[current].title;
+    slideSubtext.textContent = texts[current].subtitle;
   }
+
+  setInterval(nextSlide, 5000);
+}
+
 
   // Initialize slideshow
   initSlideshow();
@@ -301,4 +215,80 @@ window.addEventListener('scroll', () => {
   window.addEventListener('load', () => {
     document.body.classList.add('loaded');
   });
+
+   loadFakeGallery();
+  loadFakeReviews();
 });
+
+// === FAKE GALLERY + FAKE REVIEWS (para testes locais) ===
+function loadFakeGallery() {
+  const gallery = document.getElementById('galleryGrid');
+  gallery.innerHTML = '';
+
+  // lista fake — caminhos relativos na pasta assets/galeria/
+  const fakeImages = [
+    'assets/galeria/trabalho1.jpg',
+    'assets/galeria/trabalho2.jpg',
+    'assets/galeria/trabalho3.jpg',
+    'assets/galeria/trabalho4.jpg',
+    'assets/galeria/trabalho5.jpg'
+  ];
+
+  fakeImages.forEach(src => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'gallery-item';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Trabalho realizado';
+    wrapper.appendChild(img);
+    gallery.appendChild(wrapper);
+  });
+}
+
+function loadFakeReviews() {
+  const reviews = [
+    {
+      name: 'João Martins',
+      date: '10/11/2025',
+      text: 'Serviço excelente — equipe pontual e trabalho impecável. Recomendo 100%.',
+      avatar: 'https://i.pravatar.cc/80?img=12'
+    },
+    {
+      name: 'Carla Souza',
+      date: '02/10/2025',
+      text: 'Rápidos e profissionais. A instalação ficou perfeita e o suporte pós-venda foi ótimo.',
+      avatar: 'https://i.pravatar.cc/80?img=32'
+    },
+    {
+      name: 'Rafael Lima',
+      date: '21/09/2025',
+      text: 'Preço justo e serviço de qualidade. Voltaria a contratar sem dúvida.',
+      avatar: 'https://i.pravatar.cc/80?img=45'
+    },
+    {
+      name: 'Mariana A.',
+      date: '17/08/2025',
+      text: 'Equipe muito preparada. Resolveram problemas antigos que ninguém queria mexer.',
+      avatar: 'https://i.pravatar.cc/80?img=8'
+    }
+  ];
+
+  const container = document.getElementById('reviews');
+  container.innerHTML = '';
+
+  reviews.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <p>"${r.text}"</p>
+      <div class="meta">
+        <div class="review-avatar"><img src="${r.avatar}" alt="${r.name}"></div>
+        <div>
+          <div class="review-name">${r.name} <span class="review-date">· ${r.date}</span></div>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
