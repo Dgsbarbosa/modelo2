@@ -172,7 +172,7 @@ a:hover {
   font-weight: 700;
   /* color: var(--primary-dark); */
    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-   font-weight: bold;
+   font-weight: bolder;
   margin: 0;
   line-height: 1; /* Corrige desalinhamento vertical */
   display: flex;
@@ -262,8 +262,11 @@ a:hover {
 
 /* Hero Section with Slideshow */
 .hero {
+  border: 1px solid black;
   position: relative;
   height: 100vh;
+  padding-top: 100px;
+  margin-top: 80px;
   min-height: 600px;
   overflow: hidden;
 }
