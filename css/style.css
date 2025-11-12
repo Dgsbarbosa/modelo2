@@ -98,8 +98,8 @@ a:hover {
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-dark);
-  color: white;
+  background-color: white;
+  color: var(--primary-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -111,11 +111,12 @@ a:hover {
 }
 
 .btn-secondary:hover {
-  background-color: var(--primary);
+  background-color: #25D366;
   color: white;
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
+
 
 /* Header */
 .site-header {
@@ -227,7 +228,7 @@ a:hover {
 }
 
 .title{
-  color: var(--secondary);
+  color: white !important;
   text-align: center;
 }
 /* Hero Section with Slideshow */
@@ -408,6 +409,11 @@ a:hover {
   
   .slide-arrow-next {
     right: 1rem;
+  }
+
+  .hero{
+  padding: 40px 0 100px;
+
   }
 }
 
@@ -658,11 +664,16 @@ a:hover {
 
 /* Serviços */
 /* Galeria */
+.reviews-section{
+  background-color: #dadada;
+  box-shadow: 5px 10px 8px rgba(0, 0, 0, 0.5);
+}
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
   align-items: center;
+
 }
 .gallery-grid img {
   width: 100%;
@@ -845,7 +856,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .footer-logo {
-  height: 50px;
+  height: 80px;
   margin-bottom: 15px;
 }
 
@@ -890,12 +901,12 @@ input:focus, textarea:focus, select:focus {
 
 .footer-bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .socials {
@@ -916,7 +927,7 @@ input:focus, textarea:focus, select:focus {
 .whatsapp-float {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 50px;
   background-color: #25D366;
   color: white;
   padding: 12px 18px;
@@ -977,7 +988,7 @@ input:focus, textarea:focus, select:focus {
   }
   
   .hero {
-    padding: 120px 0 80px;
+    padding: 80px 0 80px;
   }
   
   .hero-title {
