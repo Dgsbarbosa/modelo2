@@ -157,8 +157,7 @@ a:hover {
 .brand-div {
   display: flex;
   flex-direction: column;
-  /* align-items: center; Centraliza verticalmente logo + texto */
-  /* gap: 10px; Espaço entre logo e texto */
+  align-items: center;   /* gap: 10px; Espaço entre logo e texto */
 }
 
 .logo {
@@ -169,16 +168,19 @@ a:hover {
 
 .title {
   font-size: 3rem;
-  font-weight: 700;
-  /* color: var(--primary-dark); */
-   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-   font-weight: bolder;
+ 
+   /* font-weight: bolder; */
   margin: 0;
   line-height: 1; /* Corrige desalinhamento vertical */
   display: flex;
   align-items: center; /* Garante centralização do texto */
 }
 
+.title, .tile-span{
+ /* font-weight: 700; */
+  /* color: var(--primary-dark); */
+   font-family: "Shrikhand","Playfair Display", Georgia, "Times New Roman", serif;
+}
 .nav-links {
   /* border: 2px solid rgb(255, 0, 0); */
 
