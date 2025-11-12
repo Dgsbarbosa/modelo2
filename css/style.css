@@ -138,11 +138,12 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 5%;
+  padding: 15px 50px;
   width: 100%;
   max-width: 100vw; /* garante que não ultrapasse */
   box-sizing: border-box;
   background-color: #FCFF59;
+  height: 100px;
 }
 
 
@@ -155,8 +156,9 @@ a:hover {
 
 .brand-div {
   display: flex;
-  align-items: center; /* Centraliza verticalmente logo + texto */
-  gap: 10px; /* Espaço entre logo e texto */
+  flex-direction: column;
+  /* align-items: center; Centraliza verticalmente logo + texto */
+  /* gap: 10px; Espaço entre logo e texto */
 }
 
 .logo {
@@ -166,9 +168,11 @@ a:hover {
 }
 
 .title {
-  font-size: 1.8rem;
+  font-size: 3rem;
   font-weight: 700;
-  color: var(--primary-dark);
+  /* color: var(--primary-dark); */
+   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+   font-weight: bold;
   margin: 0;
   line-height: 1; /* Corrige desalinhamento vertical */
   display: flex;
@@ -389,21 +393,24 @@ a:hover {
    .nav {
     justify-content: center;
     position: relative;
-    height: 50px;
+    
   }
+  .brand-div{
+    align-items: center;
 
+  }
   .brand {
     /* position: absolute; */
     
     transform: translateX(-50%);
   }
   .title{
-    font-size: 1.3rem;
+    font-size: 3rem;
   }
 
   .nav-toggle {
     position: absolute;
-    right: 20px;
+    right: 40px;
   }
 
   .nav-links {
