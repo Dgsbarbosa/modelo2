@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // loadFakeGallery();
   loadFakeReviews();
 
-  loadDriveGallery();
+  loadGallery();
 });
 
 // === FAKE GALLERY + FAKE REVIEWS (testes locais) ===
@@ -223,33 +223,36 @@ function loadFakeReviews() {
 }
 
 // === GALERIA REAL - Google Drive ===
-async function loadDriveGallery() {
+async function loadGallery() {
   const gallery = document.getElementById("galleryGrid");
-  gallery.innerHTML = "<p>Carregando fotos...</p>";
+  gallery.innerHTML = "<p>Carregando imagens...</p>";
 
   try {
-    const response = await fetch("https://jnl-security.vercel.app/drive.php");
-    const data = await response.json();
+    const res = await fetch("galeria.php");
+    const imagens = await res.json();
 
     gallery.innerHTML = "";
 
-    data.files.forEach(file => {
+    imagens.forEach(src => {
       const item = document.createElement("div");
       item.className = "gallery-item";
 
       const img = document.createElement("img");
-      img.src = `https://drive.google.com/uc?id=${file.id}`;
-      img.alt = file.name;
+      img.src = src;
+      img.alt = "Foto";
 
       item.appendChild(img);
       gallery.appendChild(item);
     });
 
   } catch (error) {
-    gallery.innerHTML = "<p>Erro ao carregar imagens.</p>";
     console.error(error);
+    gallery.innerHTML = "<p>Erro ao carregar imagens.</p>";
   }
 }
+
+
+
 
 
 // === AVALIAÇÕES REAIS - Google Places ===
