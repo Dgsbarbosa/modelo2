@@ -9,13 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
       const expanded = this.getAttribute('aria-expanded') === 'true';
       this.setAttribute('aria-expanded', String(!expanded));
       navLinks.classList.toggle('show');
-      
-      // Animate hamburger icon
       this.classList.toggle('active');
     });
   }
-  
-  // Close mobile menu when clicking on a link
+
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('show');
@@ -25,154 +22,119 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-  
+
   // Header scroll effect
   const header = document.querySelector('.site-header');
   let lastScrollY = window.scrollY;
-  
-  // Header scroll effect - CORRIGIDO PARA MANTER O AMARELO
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) {
-    header.style.backgroundColor = 'rgba(252, 255, 89, 0.98)'; // ← AMARELO COM TRANSPARÊNCIA
-    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-  } else {
-    header.style.backgroundColor = 'rgba(252, 255, 89, 0.95)'; // ← AMARELO COM TRANSPARÊNCIA
-    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-  }
-  
-  // Hide/show header on scroll
-  if (window.scrollY > lastScrollY && window.scrollY > 200) {
-    header.style.transform = 'translateY(-100%)';
-  } else {
-    header.style.transform = 'translateY(0)';
-  }
-  
-  lastScrollY = window.scrollY;
-});
-  
-  // Smooth scrolling for anchor links
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      header.style.backgroundColor = 'rgba(252, 255, 89, 0.98)';
+      header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+    } else {
+      header.style.backgroundColor = 'rgba(252, 255, 89, 0.95)';
+      header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+    }
+
+    if (window.scrollY > lastScrollY && window.scrollY > 200) {
+      header.style.transform = 'translateY(-100%)';
+    } else {
+      header.style.transform = 'translateY(0)';
+    }
+
+    lastScrollY = window.scrollY;
+  });
+
+  // Smooth scrolling
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
-      
       if (href === '#') return;
-      
       e.preventDefault();
       const target = document.querySelector(href);
-      
       if (target) {
         const headerHeight = header.offsetHeight;
         const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
       }
     });
   });
-  
-  // Slideshow functionality
-function initSlideshow() {
-  const slides = document.querySelectorAll('.slide');
-  const slideText = document.getElementById('slideText');
-  const slideSubtext = document.getElementById('slideSubtext');
 
-  const texts = [
-    {
-      title: 'Segurança e energia com excelência',
-      subtitle: 'Soluções completas em segurança eletrônica e serviços elétricos'
-    },
-    {
-      title: 'Protegendo o que realmente importa',
-      subtitle: 'Segurança Eletrônica de última geração'
-    },
-    {
-      title: 'Serviços Elétricos com qualidade e confiança',
-      subtitle: 'Profissionais certificados e experientes'
+  // Slideshow
+  function initSlideshow() {
+    const slides = document.querySelectorAll('.slide');
+    const slideText = document.getElementById('slideText');
+    const slideSubtext = document.getElementById('slideSubtext');
+
+    const texts = [
+      { title: 'Segurança e energia com excelência', subtitle: 'Soluções completas em segurança eletrônica e serviços elétricos' },
+      { title: 'Protegendo o que realmente importa', subtitle: 'Segurança Eletrônica de última geração' },
+      { title: 'Serviços Elétricos com qualidade e confiança', subtitle: 'Profissionais certificados e experientes' }
+    ];
+
+    let current = 0;
+    function nextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+      slideText.textContent = texts[current].title;
+      slideSubtext.textContent = texts[current].subtitle;
     }
-  ];
-
-  let current = 0;
-  function nextSlide() {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-
-    slideText.textContent = texts[current].title;
-    slideSubtext.textContent = texts[current].subtitle;
+    setInterval(nextSlide, 5000);
   }
-
-  setInterval(nextSlide, 5000);
-}
-
-
-  // Initialize slideshow
   initSlideshow();
-  
-  // Intersection Observer for animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-  
+
+  // Intersection Observer
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('animate-in');
     });
-  }, observerOptions);
-  
-  // Observe elements for animation
-  document.querySelectorAll('.service-card, .feature-card, .section-header').forEach(el => {
-    observer.observe(el);
-  });
-  
-  // Form handling
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.service-card, .feature-card, .section-header').forEach(el => observer.observe(el));
+
+  // === FORMULÁRIO DE CONTATO VIA WHATSAPP ===
   const contactForm = document.getElementById('contactForm');
   const formFeedback = document.getElementById('formFeedback');
   const clearFormBtn = document.getElementById('clearForm');
-  
+
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      
-      // Get form data
+
       const formData = new FormData(this);
       const name = formData.get('name').trim();
       const email = formData.get('email').trim();
-      const phone = formData.get('phone');
+      const phone = formData.get('phone').trim();
       const service = formData.get('service');
       const message = formData.get('message').trim();
-      
-      // Validation
+
       if (!name || !email || !service || !message) {
         showFeedback('Por favor, preencha todos os campos obrigatórios.', 'error');
         return;
       }
-      
+
       if (!isValidEmail(email)) {
         showFeedback('Por favor, insira um e-mail válido.', 'error');
         return;
       }
-      
-      // Show loading state
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando...';
-      
-      // Simulate form submission (replace with actual API call)
-      setTimeout(() => {
-        showFeedback('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
-        contactForm.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-      }, 1500);
+
+      const texto = `*Novo orçamento via site JNL:*\n\n` +
+        `*Nome:* ${name}\n` +
+        `*E-mail:* ${email}\n` +
+        `*Telefone:* ${phone}\n` +
+        `*Serviço:* ${service}\n` +
+        `*Mensagem:* ${message}`;
+
+      const numero = '5514991580947'; // SEU WHATSAPP COM DDI+DDD
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+
+      showFeedback('Abrindo WhatsApp...', 'success');
+      window.open(url, '_blank');
+      contactForm.reset();
     });
   }
-  
+
   if (clearFormBtn) {
     clearFormBtn.addEventListener('click', () => {
       if (contactForm) {
@@ -182,18 +144,14 @@ function initSlideshow() {
       }
     });
   }
-  
-  // Email validation function
+
   function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
-  
-  // Show form feedback
+
   function showFeedback(message, type) {
     formFeedback.textContent = message;
     formFeedback.className = 'form-feedback';
-    
     if (type === 'error') {
       formFeedback.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
       formFeedback.style.color = '#dc3545';
@@ -204,28 +162,22 @@ function initSlideshow() {
       formFeedback.style.border = '1px solid rgba(40, 167, 69, 0.2)';
     }
   }
-  
-  // Update copyright year
-  const yearElement = document.getElementById('year');
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-  
-  // Add loading animation to page
-  window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-  });
 
-   loadFakeGallery();
+  const yearElement = document.getElementById('year');
+  if (yearElement) yearElement.textContent = new Date().getFullYear();
+
+  window.addEventListener('load', () => document.body.classList.add('loaded'));
+
+  // loadFakeGallery();
   loadFakeReviews();
+
+  loadDriveGallery();
 });
 
-// === FAKE GALLERY + FAKE REVIEWS (para testes locais) ===
+// === FAKE GALLERY + FAKE REVIEWS (testes locais) ===
 function loadFakeGallery() {
   const gallery = document.getElementById('galleryGrid');
   gallery.innerHTML = '';
-
-  // lista fake — caminhos relativos na pasta assets/galeria/
   const fakeImages = [
     'assets/galeria/trabalho1.jpg',
     'assets/galeria/trabalho2.jpg',
@@ -233,7 +185,6 @@ function loadFakeGallery() {
     'assets/galeria/trabalho4.jpg',
     'assets/galeria/trabalho5.jpg'
   ];
-
   fakeImages.forEach(src => {
     const wrapper = document.createElement('div');
     wrapper.className = 'gallery-item';
@@ -247,35 +198,14 @@ function loadFakeGallery() {
 
 function loadFakeReviews() {
   const reviews = [
-    {
-      name: 'João Martins',
-      date: '10/11/2025',
-      text: 'Serviço excelente — equipe pontual e trabalho impecável. Recomendo 100%.',
-      avatar: 'https://i.pravatar.cc/80?img=12'
-    },
-    {
-      name: 'Carla Souza',
-      date: '02/10/2025',
-      text: 'Rápidos e profissionais. A instalação ficou perfeita e o suporte pós-venda foi ótimo.',
-      avatar: 'https://i.pravatar.cc/80?img=32'
-    },
-    {
-      name: 'Rafael Lima',
-      date: '21/09/2025',
-      text: 'Preço justo e serviço de qualidade. Voltaria a contratar sem dúvida.',
-      avatar: 'https://i.pravatar.cc/80?img=45'
-    },
-    {
-      name: 'Mariana A.',
-      date: '17/08/2025',
-      text: 'Equipe muito preparada. Resolveram problemas antigos que ninguém queria mexer.',
-      avatar: 'https://i.pravatar.cc/80?img=8'
-    }
+    { name: 'João Martins', date: '10/11/2025', text: 'Serviço excelente — equipe pontual e trabalho impecável. Recomendo 100%.', avatar: 'https://i.pravatar.cc/80?img=12' },
+    { name: 'Carla Souza', date: '02/10/2025', text: 'Rápidos e profissionais. Instalação perfeita e suporte ótimo.', avatar: 'https://i.pravatar.cc/80?img=32' },
+    { name: 'Rafael Lima', date: '21/09/2025', text: 'Preço justo e serviço de qualidade. Voltaria a contratar.', avatar: 'https://i.pravatar.cc/80?img=45' },
+    { name: 'Mariana A.', date: '17/08/2025', text: 'Equipe muito preparada. Resolveram problemas antigos.', avatar: 'https://i.pravatar.cc/80?img=8' }
   ];
 
   const container = document.getElementById('reviews');
   container.innerHTML = '';
-
   reviews.forEach(r => {
     const card = document.createElement('div');
     card.className = 'review-card';
@@ -290,5 +220,73 @@ function loadFakeReviews() {
     `;
     container.appendChild(card);
   });
+}
+
+// === GALERIA REAL - Google Drive ===
+async function loadDriveGallery() {
+  const gallery = document.getElementById("galleryGrid");
+  gallery.innerHTML = "<p>Carregando fotos...</p>";
+
+  try {
+    const response = await fetch("https://jnl-security.vercel.app//drive.php");
+    const data = await response.json();
+
+    gallery.innerHTML = "";
+
+    data.files.forEach(file => {
+      const item = document.createElement("div");
+      item.className = "gallery-item";
+
+      const img = document.createElement("img");
+      img.src = `https://drive.google.com/uc?id=${file.id}`;
+      img.alt = file.name;
+
+      item.appendChild(img);
+      gallery.appendChild(item);
+    });
+
+  } catch (error) {
+    gallery.innerHTML = "<p>Erro ao carregar imagens.</p>";
+    console.error(error);
+  }
+}
+
+
+// === AVALIAÇÕES REAIS - Google Places ===
+async function loadGoogleReviews() {
+  const placeId = 'SEU_PLACE_ID_AQUI'; // 🔹 cole aqui o place_id da empresa
+  const apiKey = 'SUA_API_KEY_AQUI'; // 🔹 mesma chave usada na galeria
+  const container = document.getElementById('reviews');
+  container.innerHTML = '<p>Carregando avaliações...</p>';
+
+  try {
+    const response = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews,rating&key=${apiKey}`);
+    const data = await response.json();
+
+    container.innerHTML = '';
+
+    if (data.result && data.result.reviews) {
+      data.result.reviews.forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+          <p>"${r.text}"</p>
+          <div class="meta">
+            <div class="review-avatar"><img src="${r.profile_photo_url}" alt="${r.author_name}"></div>
+            <div>
+              <div class="review-name">${r.author_name} <span class="review-date">· ${new Date(r.time * 1000).toLocaleDateString('pt-BR')}</span></div>
+              <div class="review-rating">⭐️ ${r.rating}</div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    } else {
+      container.innerHTML = '<p>Nenhuma avaliação disponível no momento.</p>';
+    }
+  } catch (error) {
+    console.error('Erro ao carregar avaliações:', error);
+    container.innerHTML = '<p>Erro ao carregar avaliações do Google.</p>';
+  }
 }
 
