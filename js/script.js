@@ -228,7 +228,7 @@ async function loadDriveGallery() {
   gallery.innerHTML = "<p>Carregando fotos...</p>";
 
   try {
-    const response = await fetch("https://jnl-security.vercel.app//drive.php");
+    const response = await fetch("https://jnl-security.vercel.app/drive.php");
     const data = await response.json();
 
     gallery.innerHTML = "";
