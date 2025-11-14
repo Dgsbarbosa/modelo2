@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Mobile Navigation Toggle
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
-  
+
   if (navToggle) {
     navToggle.addEventListener('click', function () {
       const expanded = this.getAttribute('aria-expanded') === 'true';
@@ -132,7 +132,13 @@ document.addEventListener('DOMContentLoaded', function () {
       showFeedback('Abrindo WhatsApp...', 'success');
       window.open(url, '_blank');
       contactForm.reset();
+      showFeedback("Continue no WhatsApp")
+
+      setTimeout(() => {
+  showFeedback("Obrigado por sua mensagem");
+}, 3000);
     });
+    
   }
 
   if (clearFormBtn) {
@@ -171,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // loadFakeGallery();
   loadFakeReviews();
 
-  loadGallery();
+  loadLocalGallery()
 });
 
 // === FAKE GALLERY + FAKE REVIEWS (testes locais) ===
@@ -223,73 +229,33 @@ function loadFakeReviews() {
 }
 
 // === GALERIA REAL - Google Drive ===
-async function loadGallery() {
+function loadLocalGallery() {
   const gallery = document.getElementById("galleryGrid");
-  gallery.innerHTML = "<p>Carregando imagens...</p>";
 
-  try {
-    const res = await fetch("galeria.php");
-    const imagens = await res.json();
+  const imagens = [
+    "assets/galeria/trabalho1.jpeg",
+    "assets/galeria/trabalho2.jpeg",
+    "assets/galeria/trabalho3.jpeg",
 
-    gallery.innerHTML = "";
+    "assets/galeria/trabalho4.jpeg",
+    "assets/galeria/trabalho5.jpeg"
+  ];
 
-    imagens.forEach(src => {
-      const item = document.createElement("div");
-      item.className = "gallery-item";
+  gallery.innerHTML = "";
 
-      const img = document.createElement("img");
-      img.src = src;
-      img.alt = "Foto";
+  imagens.forEach(src => {
+    const item = document.createElement("div");
+    item.className = "gallery-item";
 
-      item.appendChild(img);
-      gallery.appendChild(item);
-    });
+    const img = document.createElement("img");
+    img.src = src;
 
-  } catch (error) {
-    console.error(error);
-    gallery.innerHTML = "<p>Erro ao carregar imagens.</p>";
-  }
+    item.appendChild(img);
+    gallery.appendChild(item);
+  });
 }
 
 
 
 
-
-// === AVALIAÇÕES REAIS - Google Places ===
-async function loadGoogleReviews() {
-  const placeId = 'SEU_PLACE_ID_AQUI'; // 🔹 cole aqui o place_id da empresa
-  const apiKey = 'SUA_API_KEY_AQUI'; // 🔹 mesma chave usada na galeria
-  const container = document.getElementById('reviews');
-  container.innerHTML = '<p>Carregando avaliações...</p>';
-
-  try {
-    const response = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews,rating&key=${apiKey}`);
-    const data = await response.json();
-
-    container.innerHTML = '';
-
-    if (data.result && data.result.reviews) {
-      data.result.reviews.forEach(r => {
-        const card = document.createElement('div');
-        card.className = 'review-card';
-        card.innerHTML = `
-          <p>"${r.text}"</p>
-          <div class="meta">
-            <div class="review-avatar"><img src="${r.profile_photo_url}" alt="${r.author_name}"></div>
-            <div>
-              <div class="review-name">${r.author_name} <span class="review-date">· ${new Date(r.time * 1000).toLocaleDateString('pt-BR')}</span></div>
-              <div class="review-rating">⭐️ ${r.rating}</div>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    } else {
-      container.innerHTML = '<p>Nenhuma avaliação disponível no momento.</p>';
-    }
-  } catch (error) {
-    console.error('Erro ao carregar avaliações:', error);
-    container.innerHTML = '<p>Erro ao carregar avaliações do Google.</p>';
-  }
-}
 
