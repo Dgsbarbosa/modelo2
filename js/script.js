@@ -228,6 +228,8 @@ function loadFakeReviews() {
   });
 }
 
+
+
 // === GALERIA REAL - Google Drive ===
 function loadLocalGallery() {
   const gallery = document.getElementById("galleryGrid");
