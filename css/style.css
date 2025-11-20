@@ -169,7 +169,8 @@ a:hover {
 }
 
 .title-a{
-  padding-left: 1px;
+  padding: 1px 0 0 0;
+  margin: 0;
 }
 
 /* .logo {
@@ -180,11 +181,11 @@ a:hover {
 
 
 .title {
-  font-size: 5rem;
+   font-size: clamp(2.5rem, 6vw, 5rem);
  
    /* font-weight: bolder; */
   margin: 0;
-  line-height: 1; /* Corrige desalinhamento vertical */
+  line-height: 0.8; /* Corrige desalinhamento vertical */
   display: flex;
   align-items: center; /* Garante centralização do texto */
   color: black;
@@ -201,7 +202,9 @@ a:hover {
   padding: 0;
   margin: 0;
   font-size: 1.1rem;
-
+  margin-top: -6px;
+  font-size: clamp(0.5rem, 1.8vw, 1.4rem);
+  text-align: center;
 }
 
 .nav-links {
@@ -210,8 +213,9 @@ a:hover {
   display: flex;
   list-style: none;
   align-items: center;
-  gap: 25px;
-  font-size: 1.5rem;
+  gap: clamp(8px, 2vw, 30px);
+    font-size: clamp(0.9rem, 1.6vw, 1.4rem);
+
 }
 
 .nav-links a {
@@ -445,6 +449,10 @@ a:hover {
   }
   .title{
     font-size: 3rem;
+  }
+
+  .title-span{
+    font-size: 1rem;
   }
 
   .nav-toggle {
