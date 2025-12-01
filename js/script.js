@@ -178,6 +178,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // loadFakeReviews();
 
   loadLocalGallery()
+  loadGalleryFromDrive();
+
 });
 
 // === FAKE GALLERY + FAKE REVIEWS (testes locais) ===
@@ -255,6 +257,28 @@ function loadLocalGallery() {
     item.appendChild(img);
     gallery.appendChild(item);
   });
+}
+
+async function loadGalleryFromDrive() {
+  const gallery = document.getElementById("galleryGrid");
+
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbzHBSqQriiDsnRNtX-sy3aXVxxCvMMsZqYje9_NMYY35XAmjgfyKwBChdl-lE2V8aYhLg/exec");
+    const imagens = await response.json();
+
+    gallery.innerHTML = "";
+
+    imagens.forEach(img => {
+      const item = document.createElement("div");
+      item.className = "gallery-item";
+      item.innerHTML = `<img src="${img.url}" alt="${img.nome}">`;
+      gallery.appendChild(item);
+    });
+
+  } catch (error) {
+    gallery.innerHTML = "<p>Erro ao carregar galeria.</p>";
+    console.error(error);
+  }
 }
 
 
