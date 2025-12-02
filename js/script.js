@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // loadFakeGallery();
   // loadFakeReviews();
 
-  loadLocalGallery()
+  // loadLocalGallery()
   loadGalleryFromDrive();
 
 });
@@ -263,7 +263,7 @@ async function loadGalleryFromDrive() {
   const gallery = document.getElementById("galleryGrid");
 
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbzHBSqQriiDsnRNtX-sy3aXVxxCvMMsZqYje9_NMYY35XAmjgfyKwBChdl-lE2V8aYhLg/exec");
+    const response = await fetch("https://script.google.com/macros/s/AKfycbz7qaz__JEQtW7piQO8UO7F36hHgWeAXykeyGq_o_4-vy7Mw4FLAAwXHyqqeTbrN5og/exec");
     const imagens = await response.json();
 
     gallery.innerHTML = "";
